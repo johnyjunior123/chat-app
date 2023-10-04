@@ -5,16 +5,11 @@ import java.util.Scanner;
 
 public class Write {
     
-    public static void write(Socket cliente){
+    public static void write(Socket cliente, String mensagem){
         try{
             PrintStream saida = new PrintStream(cliente.getOutputStream());
-            // Mensagem msg = new Mensagem(criarData.criar(), "ola tudo bem?");
-            // saida.print(msg);
-            Scanner escritor = new Scanner(System.in);
-            while(escritor.hasNextLine()){
-                saida.println(escritor.nextLine());
-            }
-            escritor.close();
+            saida.println(mensagem);
+            saida.flush();
         }catch(IOException e){
             System.out.println(e);
         }

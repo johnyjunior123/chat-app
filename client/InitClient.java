@@ -7,8 +7,8 @@ public class InitClient {
     public static void main(String[] args) {
         try{
             Socket cliente = new Socket("127.0.0.1", 3000);
-            Write.write(cliente);
-            cliente.close();
+            telaCliente tela = new telaCliente(cliente);
+            tela.setVisible(true);
         }catch(IOException e){
             System.out.println(e);
         }
