@@ -27,6 +27,7 @@ public class ThreadCliente extends Thread{
             this.saidaTexto = new BufferedWriter(saida);
             this.server.addCliente(this.saidaTexto);
             System.out.println("quantidade de usuarios ativos: " + this.server.getClientes().size());
+            
         }catch(IOException e){
             System.out.println(e);
         }
@@ -35,13 +36,11 @@ public class ThreadCliente extends Thread{
     
     public void run(){
         try{
-            Mensagem msg;
             String conteudo = "";
             // System.out.println(this.entradaTexto.re  adLine());
             while(!"Sair".equalsIgnoreCase(conteudo) && conteudo != null){
                 conteudo = this.entradaTexto.readLine();
-                msg = new Mensagem(criarData.criar(), conteudo);
-                System.out.println(msg);
+                this.server.enviarParaTodos(this.saidaTexto, conteudo);
             }
         }catch(IOException e){
             System.out.println(e);

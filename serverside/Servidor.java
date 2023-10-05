@@ -53,6 +53,18 @@ public class Servidor{
     public void removeCliente(BufferedWriter bfw){
         this.clientes.remove(bfw);
     }
+    
+    public void enviarParaTodos(BufferedWriter remetente, String mensagem){
+        for(BufferedWriter cliente : this.clientes){
+            try{
+                cliente.write(mensagem);
+            }catch(IOException e){
+                System.out.println(e);
+            }
+        }
+    }
+
+    public 
 
     public ArrayList<BufferedWriter> getClientes(){
         return this.clientes;
