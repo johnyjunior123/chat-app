@@ -36,7 +36,20 @@ public class Mensagem{
         return 0;
     }
 
+    public Date getDate(){
+        return this.date;
+    }
+
+    public String getContent(){
+        return this.content;
+    }
+
+    public InputStream getArchive(){
+        return this.archive;
+    }
+
     public String toString(){
-        return String.format("Data: %s\nConteudo: %s\nArquivo: %s", this.date, this.content, this.archive);
+        // data/arquivo/conteudo
+        return String.format("%s#%s#%s", this.date,this.archive, this.content);
     }
 }

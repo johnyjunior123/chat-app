@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Mensagem implements Serializable{
+public class Mensagem{
     // atribbuttes
     private Date date;
     private String content = null;
@@ -43,7 +43,14 @@ public class Mensagem implements Serializable{
         return this.content;
     }
 
+    public String objeto(){
+        String mensagem = String.format("%s#\n%s#\n%s", this.date,this.archive, this.content);
+        return mensagem;
+    }
+
+    @Override
     public String toString(){
-        return String.format("Data: %s\nConteudo: %s\nArquivo: %s", this.date, this.content, this.archive);
+        // data/conteudo/arquivo
+        return String.format("%s#\n%s#\n%s", this.date,this.archive, this.content);
     }
 }
