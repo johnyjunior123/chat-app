@@ -1,5 +1,5 @@
-import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class Servidor{
     public ServerSocket server;
-    private ArrayList<BufferedWriter>clientes;
+    private ArrayList<PrintStream>clientes;
 
     public Servidor(){
         try{
-            clientes = new ArrayList<BufferedWriter>();
+            clientes = new ArrayList<PrintStream>();
             server = new ServerSocket(3000);
             System.out.println("Configurado porta:3000");
             InetAddress inet = this.server.getInetAddress();
@@ -46,28 +46,24 @@ public class Servidor{
         }
     }
 
-    public void addCliente(BufferedWriter bfw){
-        this.clientes.add(bfw);
+    public void addCliente(PrintStream saida){
+        this.clientes.add(saida);
     }
 
-    public void removeCliente(BufferedWriter bfw){
-        this.clientes.remove(bfw);
+    public void removeCliente(PrintStream saida){
+        this.clientes.remove(saida);
     }
     
-    public void enviarParaTodos(BufferedWriter remetente, String mensagem){
-        for(BufferedWriter cliente : this.clientes){
-            try{
-                cliente.write(mensagem);
-            }catch(IOException e){
-                System.out.println(e);
+    public void enviarParaTodos(PrintStream remetente, String mensagem){
+        for(PrintStream cliente : this.clientes){
+            if(cliente != remetente){
+                cliente.println(mensagem);
             }
         }
     }
 
-    public 
-
-    public ArrayList<BufferedWriter> getClientes(){
-        return this.clientes;
+    public int qntdClientes(){
+        return this.clientes.size();
     }
 }
 
