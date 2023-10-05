@@ -3,14 +3,15 @@ import java.util.ArrayList;
 
 public class telaCliente extends javax.swing.JFrame {
     private Socket cliente;
-    private ArrayList<String>mensagem_list;
+    private String nomeUsuario;
     /**
      * Creates new form telaCliente
      */
     public telaCliente(Socket cliente) {
         initComponents();
+        Entrada entrada = new Entrada(this, true, this);
+        entrada.setVisible(true);
         this.cliente = cliente;
-        this.mensagem_list = new ArrayList<String>();
     }
 
     /**
@@ -88,18 +89,22 @@ public class telaCliente extends javax.swing.JFrame {
                         
 
     private void butaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {
-        Write.write(this.cliente, areaMensagem.getText());
+        Write.write(this.cliente, tratarMensagem.formatarParaEnviar(this.nomeUsuario, areaMensagem.getText()));
         renderizarPropriaMensagem(areaMensagem.getText());
         this.areaMensagem.setText(null);
         // TODO add your handling code here:
     }                                           
 
     private void renderizarPropriaMensagem(String mensagem){
-        this.mensagens.append(tratarMensagem.formatar(mensagem));
+        this.mensagens.append(tratarMensagem.formatarMinha(mensagem));
     }
 
     public void renderizarOutrasMensagens(String mensagem){
-        this.mensagens.append(tratarMensagem.formatar(mensagem));
+        this.mensagens.append(tratarMensagem.formatarRecebidoDeOutros(mensagem));
+    }
+
+    public void setNomeUsuario(String nome){
+        this.nomeUsuario = nome;
     }
 
     /**
