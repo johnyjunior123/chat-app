@@ -25,7 +25,13 @@ public class Listen extends Thread{
             String conteudo = "";
             while(!"Sair".equalsIgnoreCase(conteudo) && conteudo != null){
                 conteudo = this.entradaTexto.readLine();
-                tela.renderizarOutrasMensagens(conteudo);
+                System.out.println(conteudo);
+                if(conteudo.startsWith("!")){
+                    System.out.println(conteudo);
+                    tela.renderizarOutrasMensagensPrivadas(conteudo);
+                }else{
+                    tela.renderizarOutrasMensagens(conteudo);
+                }
             }
         }catch(IOException e){
             System.out.println(e);

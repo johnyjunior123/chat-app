@@ -1,5 +1,3 @@
-import javax.swing.JDialog;
-
 public class Entrada extends javax.swing.JDialog {
     private telaCliente tela;
     /**
@@ -9,6 +7,7 @@ public class Entrada extends javax.swing.JDialog {
         super(parent, modal);
         this.tela = tela;
         initComponents();
+        this.setLocationRelativeTo(tela);
     }
 
     /**
